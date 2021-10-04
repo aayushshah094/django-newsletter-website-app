@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
 import requests
 API_KEY= '6a48ce06539b47ae8812935869b85c61'
@@ -34,21 +35,21 @@ def home(request):
 
 def registerPage(request):
 	if request.user.is_authenticated:
-		return render(request,'news_api/home.html')
+		return render(request, 'news_api/home.html')
 	else:
-		form = UserCreationForm()
+		form = CreateUserForm()
 		if request.method == 'POST':
-			form = UserCreationForm(request.POST)
+			form = CreateUserForm(request.POST)
 			if form.is_valid():
 				form.save()
 				user = form.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
 
-			return render(request,'accounts/login.html')
+				return redirect('login')
 			
 
-		context = {'form':form}
-		return render(request, 'accounts/register.html', context)
+	context = {'form':form}
+	return render(request, 'accounts/register.html', context)
 
 def loginPage(request):
 	if request.user.is_authenticated:
