@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CreateUserForm
@@ -20,7 +19,7 @@ def home(request):
         data = response.json()
         articles = data['articles']
     else:
-        url = f'https://newsapi.org/v2/top-headlines?category={category}&apiKey={API_KEY}'
+        url = f'https://newsapi.org/v2/top-headlines?category={category}&country=us&apiKey={API_KEY}'
         response = requests.get(url)
         data = response.json()
         articles = data['articles']

@@ -130,4 +130,11 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
         
-# 'DIRS': [r'C:\Users\aayus\OneDrive\Desktop\newsletter website\news_api\templates\accounts',r'C:\Users\aayus\OneDrive\Desktop\newsletter website\news_api\templates\news_api']
+#SMTP Configuration (simple mail transfer protocol)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'aayushshah490490@gmail.com'
+EMAIL_HOST_PASSWORD = 'Jayshah1@'
