@@ -1,3 +1,4 @@
+from django import urls
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -7,31 +8,6 @@ import requests
 API_KEY= '6a48ce06539b47ae8812935869b85c61'
 
 # Create your views here.
-
-@login_required(login_url='login')
-def home(request):
-    country = request.GET.get('country')
-    category = request.GET.get('category')
-
-    if country:
-        url = f'https://newsapi.org/v2/top-headlines?country=us&apiKey={API_KEY}'
-        response = requests.get(url)
-        data = response.json()
-        articles = data['articles']
-    else:
-        url = f'https://newsapi.org/v2/top-headlines?category={category}&country=us&apiKey={API_KEY}'
-        response = requests.get(url)
-        data = response.json()
-        articles = data['articles']
-
-
-
-    context = {
-        'articles' : articles
-    }
-
-    return render(request, 'news_api/home.html', context)
-
 def registerPage(request):
 	if request.user.is_authenticated:
 		return render(request, 'news_api/home.html')
@@ -52,7 +28,7 @@ def registerPage(request):
 
 def loginPage(request):
 	if request.user.is_authenticated:
-		return render(request,'news_api/home.html')
+		return redirect('home')
 	else:
 		if request.method == 'POST':
 			username = request.POST.get('username')
@@ -62,7 +38,7 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
-				return render(request,'news_api/home.html')
+				return redirect('home')			
 			else:
 				messages.info(request, 'Username OR password is incorrect')
 
@@ -72,3 +48,109 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return render(request,'accounts/logout.html')
+
+
+@login_required(login_url='login')
+def home(request):
+    url = f'https://newsapi.org/v2/top-headlines?category=general&country=us&apiKey={API_KEY}'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+
+    context = {
+        'articles' : articles
+    }
+
+    return render(request, 'news_api/home.html', context)
+
+@login_required(login_url='login')
+def business(request):
+    url = f'https://newsapi.org/v2/top-headlines?category=business&country=us&apiKey={API_KEY}'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+
+    context = {
+        'articles' : articles
+    }
+
+    return render(request, 'news_api/business.html', context)
+
+@login_required(login_url='login')
+def technology(request):
+    url = f'https://newsapi.org/v2/top-headlines?category=technology&country=us&apiKey={API_KEY}'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+
+    context = {
+        'articles' : articles
+    }
+
+    return render(request, 'news_api/technology.html', context)
+
+@login_required(login_url='login')
+def general(request):
+    url = f'https://newsapi.org/v2/top-headlines?category=general&country=us&apiKey={API_KEY}'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+
+    context = {
+        'articles' : articles
+    }
+
+    return render(request, 'news_api/general.html', context)
+
+@login_required(login_url='login')
+def health(request):
+    url = f'https://newsapi.org/v2/top-headlines?category=health&country=us&apiKey={API_KEY}'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+
+    context = {
+        'articles' : articles
+    }
+
+    return render(request, 'news_api/health.html', context)
+
+@login_required(login_url='login')
+def sports(request):
+    url = f'https://newsapi.org/v2/top-headlines?category=sports&country=us&apiKey={API_KEY}'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+
+    context = {
+        'articles' : articles
+    }
+
+    return render(request, 'news_api/sports.html', context)
+
+@login_required(login_url='login')
+def entertainment(request):
+    url = f'https://newsapi.org/v2/top-headlines?category=entertainment&country=us&apiKey={API_KEY}'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+
+    context = {
+        'articles' : articles
+    }
+
+    return render(request, 'news_api/entertainment.html', context)
+
+@login_required(login_url='login')
+def science(request):
+    url = f'https://newsapi.org/v2/top-headlines?category=science&country=us&apiKey={API_KEY}'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+
+    context = {
+        'articles' : articles
+    }
+
+    return render(request, 'news_api/science.html', context)
+

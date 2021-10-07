@@ -5,10 +5,18 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('register/', views.registerPage, name="register"),
-	path('login/', views.loginPage, name="login"),  
+	path('', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
     
-    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('business/', views.business, name='business'),
+    path('technology/', views.technology, name='technology'),
+    path('health/', views.health, name='health'),
+    path('science/', views.science, name='science'),
+    path('sports/', views.sports, name='sports'),
+    path('entertainment/', views.entertainment, name='entertainment'),
+    path('general/', views.general, name='general'),
+
 
         path('reset_password/',
      auth_views.PasswordResetView.as_view(template_name="accounts/password_reset.html"),
