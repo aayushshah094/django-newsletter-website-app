@@ -52,10 +52,18 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def home(request):
-    url = f'https://newsapi.org/v2/top-headlines?category=general&country=us&apiKey={API_KEY}'
-    response = requests.get(url)
-    data = response.json()
-    articles = data['articles']
+    keyword = request.GET.get('keyword')
+    if keyword:
+        url = f'https://newsapi.org/v2/everything?q={keyword}&apiKey={API_KEY}'
+        response = requests.get(url)
+        data = response.json()
+        articles = data['articles']
+
+    else:
+        url = f'https://newsapi.org/v2/top-headlines?category=general&country=us&apiKey={API_KEY}'
+        response = requests.get(url)
+        data = response.json()
+        articles = data['articles']
 
     context = {
         'articles' : articles
