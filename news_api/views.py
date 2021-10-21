@@ -2,7 +2,7 @@ from django import urls
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import CreateUserForm
+from .forms import CreateUserForm, Profileform
 from django.contrib.auth.decorators import login_required
 import requests
 API_KEY= '6a48ce06539b47ae8812935869b85c61'
@@ -49,6 +49,18 @@ def logoutUser(request):
 	logout(request)
 	return render(request,'accounts/logout.html')
 
+@login_required(login_url='login')
+def Profilepg(request):
+    profile = request.user.profile
+    form = Profileform(instance=profile)
+
+    if request.method == 'POST':
+        form = Profileform(request.POST, request.FILES, instance = profile)
+        if form.is_valid():
+            form.save()
+            
+    context = {'form': form}
+    return render(request, 'accounts/profile.html', context)
 
 @login_required(login_url='login')
 def home(request):
