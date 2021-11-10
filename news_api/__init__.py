@@ -1,1 +1,1 @@
-default_app_config = 'news_api.apps.NewsApiConfig'
+#default_app_config = 'news_api.apps.NewsApiConfig'
