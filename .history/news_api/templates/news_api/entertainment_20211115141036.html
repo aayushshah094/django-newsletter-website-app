@@ -1,0 +1,28 @@
+{% extends 'news_api/home.html' %}
+{% load static %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% for entertainment_list in all_articles %}
+
+                    <div class="card rounded shadow m-1" style="width: 50rem;">
+                        <img src="{{ entertainment_list.urlToImage }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <p class="card-text">{{ entertainment_list.author }}</p>
+                        <h5 class="card-title">{{ entertainment_list.title }}</h5>
+                        <p class="card-title">{{ entertainment_list.source.name }}</p>
+                        <p class="card-text">{{ entertainment_list.description }}</p>
+                        <hr>
+                        <small>date: {{ entertainment_list.publishedAt }}</small>
+                        <a href="{{ i.url }}" target="_blank" class="btn btn-success m-1">See News</a>
+                        </div>
+                    </div>
+
+                  {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
