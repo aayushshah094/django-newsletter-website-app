@@ -23,8 +23,6 @@ class Post(models.Model):
     urlToImage = models.ImageField(null=True, blank=True)
     publishedAt = models.CharField(max_length=100, null=True, blank=True)
     content = models.TextField(null=True, blank=True)
-    liked = models.ManyToManyField(Profile, blank=True, related_name='likes')
-
 
 
     def __str__(self):
@@ -37,7 +35,7 @@ LIKE_CHOICES = (('Like', 'Like'), ('Unlike', 'Unlike'))
 
 class Like(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    posts = models.ForeignKey(Post,  null=True, blank = True, on_delete=models.CASCADE)
+    posts = models.ForeignKey(Post,  null=True, blank = Trueon_delete=models.CASCADE)
     value = models.CharField(choices=LIKE_CHOICES, max_length=8)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

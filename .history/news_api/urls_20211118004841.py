@@ -17,7 +17,7 @@ urlpatterns = [
     path('sports/', views.sports, name='sports'),
     path('entertainment/', views.entertainment, name='entertainment'),
     path('general/', views.general, name='general'),
-    path('Liked/', views.like_unlike_post, name = 'like-post-view'),
+     path('Liked/', views.like_unlike_post, name = 'like-post-view'),
 
     path('reset_password/',
      auth_views.PasswordResetView.as_view(template_name="accounts/password_reset.html"),

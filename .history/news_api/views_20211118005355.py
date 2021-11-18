@@ -74,7 +74,7 @@ def home(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = Posts(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -85,7 +85,7 @@ def home(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = Posts.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=general&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -93,7 +93,7 @@ def home(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = Posts(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -104,7 +104,7 @@ def home(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id').reverse()[:10]
+                all_articles = Posts.objects.all().order_by('-id').reverse()[:10]
         
     context = {
         'all_articles' : all_articles
@@ -121,7 +121,7 @@ def business(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = Posts(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -132,7 +132,7 @@ def business(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = Posts.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=business&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -140,7 +140,7 @@ def business(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = Posts(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -151,7 +151,7 @@ def business(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id')[:10]
+                all_articles = Posts.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles
@@ -169,7 +169,7 @@ def technology(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = Posts(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -180,7 +180,7 @@ def technology(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = Posts.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=technology&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -188,7 +188,7 @@ def technology(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = Posts(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -199,7 +199,7 @@ def technology(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id')[:10]
+                all_articles = Posts.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles
@@ -217,7 +217,7 @@ def general(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = Posts(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -228,7 +228,7 @@ def general(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = Posts.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=general&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -236,7 +236,7 @@ def general(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = Posts(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -247,7 +247,7 @@ def general(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id').reverse()[:10]
+                all_articles = Posts.objects.all().order_by('-id').reverse()[:10]
         
     context = {
         'all_articles' : all_articles
@@ -264,7 +264,7 @@ def health(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = Posts(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -275,7 +275,7 @@ def health(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = Posts.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=health&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -283,7 +283,7 @@ def health(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = Posts(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -294,7 +294,7 @@ def health(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id')[:10]
+                all_articles = Posts.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles
@@ -311,7 +311,7 @@ def sports(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = Posts(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -322,7 +322,7 @@ def sports(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = Posts.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=sports&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -330,7 +330,7 @@ def sports(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = Posts(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -341,7 +341,7 @@ def sports(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id')[:10]
+                all_articles = News.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles
@@ -358,7 +358,7 @@ def entertainment(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = News(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -369,7 +369,7 @@ def entertainment(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = News.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=entertainment&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -377,7 +377,7 @@ def entertainment(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = News(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -388,7 +388,7 @@ def entertainment(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id')[:10]
+                all_articles = News.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles
@@ -405,7 +405,7 @@ def science(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = News(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -416,7 +416,7 @@ def science(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = News.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=science&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -424,7 +424,7 @@ def science(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = News(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -435,7 +435,7 @@ def science(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id')[:10]
+                all_articles = News.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles
@@ -443,35 +443,35 @@ def science(request):
     return render(request, 'news_api/science.html', context)
 
 def businessDB(request):
-    business_list = Post.objects.all()
+    business_list = News.objects.all()
     return render (request, 'business.html', {'business_list':business_list} )
 
 def homeDB(request):
-    home_list = Post.objects.all()
+    home_list = News.objects.all()
     return render (request, 'home.html', {'home_list':home_list} )
 
 def generalDB(request):
-    general_list = Post.objects.all()
+    general_list = News.objects.all()
     return render (request, 'general.html', {'business_list':general_list} )
 
 def healthDB(request):
-    health_list = Post.objects.all()
+    health_list = News.objects.all()
     return render (request, 'health.html', {'health_list':health_list} )
 
 def sportsDB(request):
-    sports_list = Post.objects.all()
+    sports_list = News.objects.all()
     return render (request, 'sports.html', {'sports_list':sports_list} )
 
 def entertainmentDB(request):
-    entertainment_list = Post.objects.all()
-    return render (request, 'entertainment.html', {'entertainment_list':entertainment_list} )
+    entertainment_list = News.objects.all()
+    return render (request, 'news_api/entertainment.html', {'entertainment_list':entertainment_list} )
 
 def technologyDB(request):
-    technology_list = Post.objects.all()
+    technology_list = News.objects.all()
     return render (request, 'technology.html', {'technology_list':technology_list} )
 
 def scienceDB(request):
-    science_list = Post.objects.all()
+    science_list = News.objects.all()
     return render (request, 'science.html', {'science_list':science_list} )
 
 def like_unlike_post(request):

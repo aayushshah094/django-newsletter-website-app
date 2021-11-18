@@ -23,7 +23,7 @@ class Post(models.Model):
     urlToImage = models.ImageField(null=True, blank=True)
     publishedAt = models.CharField(max_length=100, null=True, blank=True)
     content = models.TextField(null=True, blank=True)
-    liked = models.ManyToManyField(Profile, blank=True, related_name='likes')
+        liked = models.ManyToManyField(Profile, blank=True, related_name='likes')
 
 
 

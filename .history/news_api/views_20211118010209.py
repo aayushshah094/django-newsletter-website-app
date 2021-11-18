@@ -151,7 +151,7 @@ def business(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id')[:10]
+                all_articles = Posts.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles

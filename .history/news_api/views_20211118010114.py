@@ -74,7 +74,7 @@ def home(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = Posts(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -85,7 +85,7 @@ def home(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = Posts.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=general&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -93,7 +93,7 @@ def home(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = Posts(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -104,7 +104,7 @@ def home(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id').reverse()[:10]
+                all_articles = Posts.objects.all().order_by('-id').reverse()[:10]
         
     context = {
         'all_articles' : all_articles
@@ -121,7 +121,7 @@ def business(request):
         articles = data['articles']
         
         for i in articles:
-            article_data = Post(
+            article_data = Posts(
                 source = i['source'],
                 author = i['author'],
                 title = i['title'],
@@ -132,7 +132,7 @@ def business(request):
                 content = i['content'],
             )
             article_data.save()
-            all_articles = Post.objects.all().order_by('-id')
+            all_articles = Posts.objects.all().order_by('-id')
     else:
         url = f'https://newsapi.org/v2/top-headlines?category=business&country=us&apiKey={API_KEY}'
         response = requests.get(url)
@@ -140,7 +140,7 @@ def business(request):
         articles = data['articles']
 
         for i in articles:
-                article_data = Post(
+                article_data = Posts(
                     source = i['source'],
                     author = i['author'],
                     title = i['title'],
@@ -151,7 +151,7 @@ def business(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = Post.objects.all().order_by('-id')[:10]
+                all_articles = Posts.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles
@@ -467,11 +467,11 @@ def entertainmentDB(request):
     return render (request, 'entertainment.html', {'entertainment_list':entertainment_list} )
 
 def technologyDB(request):
-    technology_list = Post.objects.all()
+    technology_list = Posts.objects.all()
     return render (request, 'technology.html', {'technology_list':technology_list} )
 
 def scienceDB(request):
-    science_list = Post.objects.all()
+    science_list = Posts.objects.all()
     return render (request, 'science.html', {'science_list':science_list} )
 
 def like_unlike_post(request):
