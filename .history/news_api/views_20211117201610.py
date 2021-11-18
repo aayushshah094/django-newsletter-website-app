@@ -247,7 +247,7 @@ def general(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = News.objects.all().order_by('-id').reverse()[:10]
+                all_articles = News.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles

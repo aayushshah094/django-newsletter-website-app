@@ -1,8 +1,10 @@
 from django import urls
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CreateUserForm, Profileform
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .models import *
 import requests
@@ -105,7 +107,6 @@ def home(request):
                 )
                 article_data.save()
                 all_articles = News.objects.all().order_by('-id').reverse()[:10]
-        
     context = {
         'all_articles' : all_articles
     }
@@ -247,7 +248,7 @@ def general(request):
                     content = i['content'],
                 )
                 article_data.save()
-                all_articles = News.objects.all().order_by('-id').reverse()[:10]
+                all_articles = News.objects.all().order_by('-id')[:10]
         
     context = {
         'all_articles' : all_articles
@@ -473,3 +474,8 @@ def technologyDB(request):
 def scienceDB(request):
     science_list = News.objects.all()
     return render (request, 'science.html', {'science_list':science_list} )
+
+def LikeView(request, pk):
+    news = get_object_or_404(News, id = request.POST.get('news_id'))
+    news.likes.add(request.user)
+    return HttpResponseRedirect(reverse('home',args=[str(pk)]))
