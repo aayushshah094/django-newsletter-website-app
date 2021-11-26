@@ -1,0 +1,21 @@
+<div class="col-md-3">
+    <div class="row mt-5">
+        <div class="col-md-5 col-sm-6">
+            <a href="{% url 'profile' object.pk %}" class="btn btn-light">Back To Profile</a>
+        </div>
+    </div>
+    
+    <div class="card card-body">
+        
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+    
+        <input class="btn btn-primary" type="submit" name="Update Information">
+        </form>
+        <div class="d-flex justify-content-center links">
+            Change password? <a href="{% url 'reset_password' %}" class="ml-2">Reset password</a>
+            <br>
+        </div>
+    </div>
+</div>

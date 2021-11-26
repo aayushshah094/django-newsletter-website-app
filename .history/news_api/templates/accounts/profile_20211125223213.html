@@ -1,0 +1,126 @@
+{% load static %}
+<style>
+	.hello-msg{
+	  font-size: 18px;
+	  color: rgb(19, 8, 8);
+	  margin-right: 20px;
+	}
+  </style>
+
+<style>
+	.navbar{
+	  border: 5px solid black;
+	}
+  </style>
+  
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="{{request.user.profile.profile_pic.url}}" height= 30, width = 30>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+	 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+  
+  
+	<span class="hello-msg">Hello, {{request.user}}</span>
+	<span> <a  class="hello-msg" href="{% url 'home' %}">Home</a></span>
+	<span> <a  class="hello-msg" href="{% url 'profile' user.profile.pk %}">Profile</a></span>
+	<span ><a  class="hello-msg" href="{% url 'logout' %}" >Logout</a></span>
+
+	<form class="d-flex" method="GET" action="{% url 'profile-search' %}">
+		<div class="input-group">
+		  <span class="input-group-text" id="basic-addon1">@</span>
+		  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
+		  <button type="submit" value="Search"> SearchUser</button>
+		</div>
+	</form>
+	
+	<h2>Search</h2>
+
+    <form action="" method="get">
+        <input type="text" name="keyword">
+        <button type="submit" value="Search">Search </button>
+    </form>
+  
+</nav>
+{% block content %}
+
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+</style>
+
+<br>
+<div class="row">
+	<div class="col-md-3">
+		<div class="card card-body">
+			<hr>
+			<h3 style="text-align: center">Profile</h3>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center mt-5">
+        <div class="card shadow-sm col-md-8 col-sm-12 border-bottom px-5 pt-3">
+            <img src="{{request.user.profile.profile_pic.url}}" class="rounded-circle" width="100" height="100" />
+            {% if user.profile.name %}
+            <h3 class="py-4">{{ user.profile.name }}
+                <span>
+                    {% if request.user.profile == profile %}
+                        <a href="{% url 'profile-edit' user.profile.pk %}" style="color: #333"><i class="far fa-edit"></i></a>
+                    {% endif %}
+                </span>
+                {% else %}
+                <h3 class="py-4">{{ profile.user }}
+                    <span>
+                        {% if request.user.profile == profile.user %}
+                            <a href="{% url 'profile-edit' user.profile.pk %}" style="color: #333"><i class="far fa-edit"></i></a>
+                        {% endif %}
+                    </span>
+                </h3>
+                {% endif %}
+            </h3>
+
+            {% if user.profile.email %}
+            <p>{{ user.profile.email }}</p>
+            {% endif %}
+        </div>
+    </div>
+	<div>
+		<p>Followers: {{ number_of_followers }}</p>
+		{% if user == request.user.profile %}
+		{% else %}
+		{% if is_following %}
+		<form method="POST" action="{% url 'remove-follower' user.profile.pk %}">
+			{% csrf_token %}
+			<button class="btn btn-outline-danger" type="submit">Unfollow</button>
+		</form>
+		{% else %}
+		<form method="POST" action="{% url 'add-follower' user.profile.pk %}">
+			{% csrf_token %}
+			<button class="btn btn-outline-success" type="submit">Follow</button>
+		</form>
+		{% endif %}
+		{% endif %}
+	</div>
+
+	<div class="col-md-9">
+		<h3><b>Category</b></h3>
+		<ul class="list-group">
+			<li class="list-group-item"><a class="btn btn-primary" href="{% url 'technology' %}?category=technology">Technology</a></li>
+			<li class="list-group-item"><a class="btn btn-primary" href="{% url 'health' %}?category=health">Health</a></li>
+			<li class="list-group-item"><a class="btn btn-primary" href="{% url 'entertainment' %}?category=Entertainment">Entertainment</a></li>
+			<li class="list-group-item"><a class="btn btn-primary" href="{% url 'sports' %}?category=Sports">Sports</a></li>
+			<li class="list-group-item"><a class="btn btn-primary" href="{% url 'science' %}?category=Science">Science</a></li>
+			<li class="list-group-item"><a class="btn btn-primary" href="{% url 'business' %}?category=Business">Business</a></li>
+			<li class="list-group-item"><a class="btn btn-primary" href="{% url 'general' %}?category=General">General</a></li>
+
+		</ul>
+	</div>
+</div>
+
+
+
+{% endblock %}
