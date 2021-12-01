@@ -1,0 +1,261 @@
+{% load static %}
+<style>
+	.hello-msg{
+	  font-size: 18px;
+	  color: rgb(19, 8, 8);
+	  margin-right: 20px;
+	}
+  </style>
+
+<style>
+	.navbar{
+	  border: 5px solid black;
+	}
+  </style>
+  
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="{{request.user.profile.profile_pic.url}}" height= 30, width = 30>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+	 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+  
+  
+	<span class="hello-msg">Hello, {{request.user}}</span>
+	<span> <a  class="hello-msg" href="{% url 'home' %}">Home</a></span>
+	<span> <a  class="hello-msg" href="{% url 'profile' user.profile.pk %}">Profile</a></span>
+	<span ><a  class="hello-msg" href="{% url 'logout' %}" >Logout</a></span>
+
+	<form class="d-flex" method="GET" action="{% url 'profile-search' %}">
+		<div class="input-group">
+		  <span class="input-group-text" id="basic-addon1">@</span>
+		  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
+		  <button type="submit" value="Search"> SearchUser</button>
+		</div>
+	</form>
+	
+	<h2>Search</h2>
+	<script type = "text/javascript">
+		function searchInput(form)
+		{
+		var input = document.forms.search.keyword.value;
+		document.getElementById('Info').innerHTML="You Searched: " + input;
+		return;
+		}
+	</script>
+	
+	<form name= "search" action="" method="get" onsubmit='return searchInput(this);'>
+		<input type="text" name="keyword" >
+		<button type="submit" value="Search">Search </button>
+	</form>
+	<div id='Info'></div></body>
+	
+	<span><a href="{% url 'keyword' %}">keyword</a></span>
+	<br>
+	<br>
+	
+</nav>
+
+
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+</style>
+
+<br>
+<div class="row">
+	<div class="col-md-3">
+		<div class="card card-body">
+			<hr>
+			<h3 style="text-align: center">Profile</h3>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center mt-5">
+        <div class="card shadow-sm col-md-8 col-sm-12 border-bottom px-5 pt-3">
+            <img src="{{request.user.profile.profile_pic.url}}" class="rounded-circle" width="100" height="100" />
+            {% if user.profile.user %}
+            <p>Username:{{ user.profile.user }}</p>
+            {% endif %}
+			{% if user.profile.name %}
+            <p>Name:{{ user.profile.name }}</p>
+            {% endif %}
+			{% if request.user.profile == user.profile %}
+			{% if user.profile.email %}
+            <p>email:{{ user.profile.email }}</p>
+            {% endif %}
+			{% endif %}
+        </div>
+		{% if request.user.profile == user.profile %}
+		<span ><a  class="edit" href="{% url 'profile-edit' user.profile.pk %}" >Edit</a></span>
+		{% endif %}
+    </div>
+	<div>
+		<p>Followers: {{ number_of_followers }}</p>
+		{% if user.profile == request.user.profile %}
+		{% else %}
+		{% if is_following %}
+		<form method="POST" action="{% url 'remove-follower' user.profile.pk %}">
+			{% csrf_token %}
+			<button class="btn btn-outline-danger" type="submit">Unfollow</button>
+		</form>
+		{% else %}
+		<form method="POST" action="{% url 'add-follower' user.profile.pk %}">
+			{% csrf_token %}
+			<button class="btn btn-outline-success" type="submit">Follow</button>
+		</form>
+		{% endif %}
+		{% endif %}
+	</div>
+
+	<script>
+		function checkMe(){
+		  var checkbox = document.getElementById("business");
+		  var text = document.getElementById("BusinessLink");
+		  if(checkbox.checked == true){
+			text.style.display="block";
+		  } else {
+			text.style.display="none";
+		  }
+		}
+	  </script>
+	  
+	  <form>
+		<h3>Categories</h3>
+		<br>
+		<input type="checkbox" id="business" styles="display:none" onclick="checkMe()"/>Business
+		<p id="BusinessLink" style="display:none"> You selected: <a href="{% url 'business' %}">Business</a> </p> 
+	  
+	  </form>
+	  
+	  <script>
+		function checkMe2(){
+		  var cb = document.getElementById("general");
+		  var text = document.getElementById("generalLink");
+		  if(cb.checked == true){
+			text.style.display="block";
+		  } else {
+			text.style.display="none";
+		  }
+		}
+	  </script>
+	  
+	  <form>
+		<input type="checkbox" id="general" styles="display:none" onclick="checkMe2()"/>general
+		<p id="generalLink" style="display:none"> You selected: <a href="{% url 'home' %}">general</a> </p> 
+	  
+	  </form>
+
+	  <script>
+		function checkMe3(){
+		  var cb = document.getElementById("technology");
+		  var text = document.getElementById("tehnologyLink");
+		  if(cb.checked == true){
+			text.style.display="block";
+		  } else {
+			text.style.display="none";
+		  }
+		}
+	  </script>
+	  
+	  <form>
+		<input type="checkbox" id="technology" styles="display:none" onclick="checkMe3()"/>technology
+		<p id="tehnologyLink" style="display:none"> You selected: <a href="{% url 'technology' %}">technology</a> </p> 
+	  
+	  </form>
+	  <script>
+		function checkMe4(){
+		  var cb = document.getElementById("sports");
+		  var text = document.getElementById("sportsLink");
+		  if(cb.checked == true){
+			text.style.display="block";
+		  } else {
+			text.style.display="none";
+		  }
+		}
+	  </script>
+	  
+	  <form>
+		<input type="checkbox" id="sports" styles="display:none" onclick="checkMe4()"/>Sports
+		<p id="sportsLink" style="display:none"> You selected: <a href="{% url 'sports' %}">Sports</a> </p> 
+	  
+	  </form>
+
+	  <script>
+		function checkMe5(){
+		  var cb = document.getElementById("Health");
+		  var text = document.getElementById("HealthLink");
+		  if(cb.checked == true){
+			text.style.display="block";
+		  } else {
+			text.style.display="none";
+		  }
+		}
+	  </script>
+	  
+	  <form>
+		<input type="checkbox" id="Health" styles="display:none" onclick="checkMe3()"/>Health
+		<p id="HealthLink" style="display:none"> You selected: <a href="{% url 'health' %}">Health</a> </p> 
+	  
+	  </form>
+
+	  <script>
+		function checkMe6(){
+		  var cb = document.getElementById("entertainment");
+		  var text = document.getElementById("entertainmentLink");
+		  if(cb.checked == true){
+			text.style.display="block";
+		  } else {
+			text.style.display="none";
+		  }
+		}
+	  </script>
+	  
+	  <form>
+		<input type="checkbox" id="entertainment" styles="display:none" onclick="checkMe6()"/>entertainment
+		<p id="entertainmentLink" style="display:none"> You selected: <a href="{% url 'entertainment' %}">entertainment</a> </p> 
+	  
+	  </form>
+
+	  <script>
+		function checkMe7(){
+		  var cb = document.getElementById("science");
+		  var text = document.getElementById("scienceLink");
+		  if(cb.checked == true){
+			text.style.display="block";
+		  } else {
+			text.style.display="none";
+		  }
+		}
+	  </script>
+	  
+	  <form>
+		<input type="checkbox" id="science" styles="display:none" onclick="checkMe3()"/>science
+		<p id="scienceLink" style="display:none"> You selected: <a href="{% url 'science' %}">science</a> </p> 
+	  
+	  </form>
+
+	  <script>
+		function checkMe3(){
+		  var cb = document.getElementById("technology");
+		  var text = document.getElementById("tehnologyLink");
+		  if(cb.checked == true){
+			text.style.display="block";
+		  } else {
+			text.style.display="none";
+		  }
+		}
+	  </script>
+	  
+	  <form>
+		<input type="checkbox" id="technology" styles="display:none" onclick="checkMe3()"/>technology
+		<p id="tehnologyLink" style="display:none"> You selected: <a href="{% url 'technology' %}">technology</a> </p> 
+	  
+	  </form>
+
+
+</div>
