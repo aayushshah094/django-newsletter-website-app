@@ -13,6 +13,8 @@ click-repl==0.2.0
 colorama==0.4.4
 Django==3.2.7
 django-binary-database-files==1.0.15
+django-celery==3.3.1
+django-celery-beat==2.2.1
 django-password-validators==1.6.1
 django-timezone-field==4.2.1
 djangorestframework==3.12.4
